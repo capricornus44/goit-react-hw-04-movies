@@ -1,5 +1,7 @@
 html {
   box-sizing: border-box;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 *,
@@ -16,6 +18,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  color: #212121;
   background-color: #e7ecf2;
 }
 
@@ -43,6 +46,6 @@ p {
 
 img {
   display: block;
-  width: 100%;
+  max-width: 100%;
   height: auto;
 }
