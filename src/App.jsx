@@ -1,30 +1,47 @@
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MoviesPage from './pages/MoviesPage';
 import MovieDetailsPage from './pages/MovieDetailsPage';
 import Cast from './pages/Cast';
 import Reviews from './pages/Reviews';
+import NotFoundPage from './pages/NotFoundPage';
 
-import './App.module.scss';
+import scss from './App.module.scss';
 
 const App = () => (
   <>
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <NavLink
+            exact
+            to="/"
+            className={scss.navLink}
+            activeClassName={scss.navLinkActive}
+          >
+            Home
+          </NavLink>
         </li>
         <li>
-          <Link to="/movies">Movies</Link>
+          <NavLink
+            to="/movies"
+            className={scss.navLink}
+            activeClassName={scss.navLinkActive}
+          >
+            Movies
+          </NavLink>
         </li>
       </ul>
     </nav>
 
-    <Route exact path="/" component={HomePage}></Route>
-    <Route path="/movies" component={MoviesPage}></Route>
-    <Route path="/movies/:movieId" component={MovieDetailsPage}></Route>
-    <Route path="/movies/:movieId/cast" component={Cast}></Route>
-    <Route path="/movies/:movieId/reviews" component={Reviews}></Route>
+    <Switch>
+      <Route exact path="/" component={HomePage}></Route>
+      <Route path="/movies" component={MoviesPage}></Route>
+      <Route path="/movies/:movieId" component={MovieDetailsPage}></Route>
+      <Route path="/movies/:movieId/cast" component={Cast}></Route>
+      <Route path="/movies/:movieId/reviews" component={Reviews}></Route>
+      <Route component={NotFoundPage}></Route>
+    </Switch>
   </>
 );
 
