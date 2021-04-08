@@ -1,0 +1,31 @@
+.pageHeader {
+  height: 60px;
+  margin-bottom: 50px;
+  border-bottom: 2px gray solid;
+  background-color: lightgrey;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.list {
+  display: flex;
+}
+
+.item:not(:last-child) {
+  margin-right: 20px;
+}
+
+.link {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: currentColor;
+}
+
+.linkActive {
+  color: tomato;
+}
