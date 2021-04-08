@@ -16,7 +16,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+    // const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
     return (
       <>
@@ -28,8 +28,11 @@ class HomePage extends Component {
                 className={scss.navLink}
               >
                 <img
-                  src={`${imageBaseUrl}${poster_path}`}
-                  alt={title}
+                  src={
+                    poster_path &&
+                    `https://image.tmdb.org/t/p/w500/${poster_path}`
+                  }
+                  alt={`${title} poster`}
                   className={scss.poster}
                 />
                 {title}
