@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+import movieDbApi from '../../services/MovieDbApi';
+
+import scss from './HomePage.module.scss';
 
 class HomePage extends Component {
   state = {
@@ -8,27 +10,30 @@ class HomePage extends Component {
   };
 
   async componentDidMount() {
-    const response = await axios.get(
-      'https://api.themoviedb.org/3/trending/movie/week?api_key=989c90c59500ad26e3fa4e26d53d2bd3',
-    );
-
-    this.setState({
-      trendMoviesList: response.data.results,
-    });
+    movieDbApi
+      .fetchTrendingMovies()
+      .then(results => this.setState({ trendMoviesList: results }));
   }
 
   render() {
-    // console.log(this.props.match.url);
+    const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+
     return (
       <>
-        <h1>Home page</h1>
-
-        <ul>
-          {this.state.trendMoviesList.map(trendMovie => (
-            <li key={trendMovie.id}>
-              <Link to={`${this.props.match.url}movies/${trendMovie.id}`}>
-                {trendMovie.title}
-              </Link>
+        <ul className={scss.grid}>
+          {this.state.trendMoviesList.map(({ id, poster_path, title }) => (
+            <li key={id} className={scss.item}>
+              <NavLink
+                to={`${this.props.match.url}movies/${id}`}
+                className={scss.navLink}
+              >
+                <img
+                  src={`${imageBaseUrl}${poster_path}`}
+                  alt={title}
+                  className={scss.poster}
+                />
+                {title}
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -38,7 +43,3 @@ class HomePage extends Component {
 }
 
 export default HomePage;
-
-// https://developers.themoviedb.org/3/trending/get-trending
-
-//https://api.themoviedb.org/3/trending/movie/week?api_key=<<api_key>>
