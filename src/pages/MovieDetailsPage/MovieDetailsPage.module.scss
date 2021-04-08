@@ -1,0 +1,103 @@
+.button {
+  margin: 0 0 20px 24px;
+  width: 80px;
+  height: 30px;
+}
+
+.movieDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 24px;
+  padding: 10px;
+
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.movieCard {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.posterBox {
+  width: 300px;
+  margin-right: 30px;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.release {
+  margin-left: 12px;
+}
+
+.scoreTitle {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.scoreNum {
+  margin-left: 12px;
+}
+
+.overviewTitle {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.overviewText {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.genresTitle {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.genresText {
+  display: inline-block;
+  margin-top: 12px;
+  margin-right: 15px;
+  border-bottom: 1px solid tomato;
+
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.addBoxTitle {
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.addBoxList {
+  list-style: initial;
+  margin-left: 40px;
+}
+
+.addBoxItem {
+  font-size: 18px;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.addBoxLink {
+  font-weight: 500;
+  text-decoration: none;
+  color: currentColor;
+
+  &:hover,
+  &:focus {
+    color: tomato;
+  }
+}
