@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 import Cast from '../../components/Cast';
 import Reviews from '../../components/Reviews';
 import movieDbApi from '../../services/MovieDbApi';
+
+import routes from '../../routes';
 
 import scss from './MovieDetailsPage.module.scss';
 
@@ -25,6 +28,18 @@ class MovieDetailsPage extends Component {
       .then(data => this.setState({ ...data }));
   }
 
+  handleGoBack = () => {
+    const { location, history } = this.props;
+
+    history.push(location?.state?.from || routes.movies);
+
+    // if (Location.state && location.state.from) {
+    //   return history.push(location.state.from);
+    // }
+
+    // history.push(routes.movies);
+  };
+
   render() {
     const {
       genres,
@@ -35,58 +50,94 @@ class MovieDetailsPage extends Component {
       vote_average,
     } = this.state;
 
-    const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+    // const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
     const voteAverage = vote_average * 10;
 
     return (
-      <section>
-        <div>
-          <div>
-            <img
-              src={`${imageBaseUrl}${poster_path}`}
-              alt={title}
-              width="300"
-            />
+      <>
+        <button
+          type="button"
+          className={scss.button}
+          onClick={this.handleGoBack}
+        >
+          Go back
+        </button>
+
+        <section className={scss.movieDetails}>
+          <div className={scss.movieCard}>
+            <div className={scss.posterBox}>
+              <img
+                src={
+                  poster_path &&
+                  `https://image.tmdb.org/t/p/w500/${poster_path}`
+                }
+                alt={`${title} poster`}
+                className={scss.poster}
+              />
+            </div>
+            <div className={scss.movieDesc}>
+              <h1 className={scss.title}>
+                {title}
+                <span className={scss.release}>({release_date})</span>
+              </h1>
+
+              <p className={scss.scoreTitle}>
+                User Score:
+                <span className={scss.scoreNum}>{voteAverage}%</span>
+              </p>
+
+              <h2 className={scss.overviewTitle}>
+                Overview
+                <p className={scss.overviewText}>{overview}</p>
+              </h2>
+
+              <h2 className={scss.genresTitle}>Genres</h2>
+              {genres.map(genre => (
+                <span key={genre.id} className={scss.genresText}>
+                  {genre.name}
+                </span>
+              ))}
+            </div>
           </div>
-          <div>
-            <h1>
-              {title}
-              <span>{release_date}</span>
-            </h1>
+          <div className={scss.addBox}>
+            <h3 className={scss.addBoxTitle}>Additional information</h3>
 
-            <p>
-              User Score:
-              <span>{voteAverage}%</span>
-            </p>
-
-            <h2>
-              Overview
-              <p>{overview}</p>
-            </h2>
-
-            {/* <h2>
-              Genres
-              <p>{genres}</p>
-            </h2> */}
+            <ul className={scss.addBoxList}>
+              <li className={scss.addBoxItem}>
+                <NavLink
+                  to={`${this.props.match.url}/cast`}
+                  className={scss.addBoxLink}
+                >
+                  Cast
+                </NavLink>
+              </li>
+              <li className={scss.addBoxItem}>
+                <NavLink
+                  to={`${this.props.match.url}/reviews`}
+                  className={scss.addBoxLink}
+                >
+                  Reviews
+                </NavLink>
+              </li>
+            </ul>
           </div>
-        </div>
+          {/* <Route path={`${this.props.match.url}/cast`} component={Cast} /> */}
+          {/* <Route path={`${this.props.match.url}/reviews`} component={Reviews} /> */}
 
-        <div>
-          <h3>Additional information</h3>
-
-          <ul>
-            <li>
-              <NavLink to="/movies/movieId/cast">Cast</NavLink>
-            </li>
-            <li>
-              <NavLink to="/movies/movieId/reviews">Reviews</NavLink>
-            </li>
-          </ul>
-        </div>
-
-        <Route path="/movies/:movieId/cast" component={Cast}></Route>
-        <Route path="/movies/:movieId/reviews" component={Reviews}></Route>
-      </section>
+          <Route
+            path={`${this.props.match.url}/cast`}
+            render={props => (
+              <Cast {...props} id={this.props.match.params.movieId} />
+            )}
+          />
+          <Route
+            path={`${this.props.match.url}/reviews`}
+            render={props => (
+              <Reviews {...props} id={this.props.match.params.movieId} />
+            )}
+          />
+        </section>
+      </>
     );
   }
 }
