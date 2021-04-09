@@ -31,7 +31,9 @@ const fetchReviews = movieId => {
 
 const fetchMoviesUponRequest = query => {
   return axios
-    .get(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
+    .get(
+      `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=1&include_adult=false`,
+    )
     .then(response => response.data.results);
 };
 
