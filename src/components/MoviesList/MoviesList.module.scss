@@ -1,0 +1,13 @@
+.list {
+  align-self: flex-start;
+  margin-left: 24px;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: currentColor;
+}
