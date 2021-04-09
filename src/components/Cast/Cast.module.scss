@@ -1,0 +1,26 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-right: -5px;
+  margin-bottom: -20px;
+}
+
+.item {
+  margin-right: 5px;
+  margin-bottom: 20px;
+}
+
+.posterBox {
+  width: 200px;
+  height: 300px;
+  margin-bottom: 5px;
+}
+
+.poster {
+  height: 100%;
+}
+
+.actor {
+  font-size: 14px;
+}
