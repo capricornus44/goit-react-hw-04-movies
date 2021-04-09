@@ -1,19 +1,19 @@
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import MoviesPage from './pages/MoviesPage';
 import MovieDetailsPage from './pages/MovieDetailsPage';
 import NotFoundPage from './pages/NotFoundPage';
-
-import scss from './App.module.scss';
+import routes from './routes';
 
 const App = () => (
   <>
     <Header />
     <Switch>
-      <Route exact path="/" component={HomePage}></Route>
-      <Route exact path="/movies" component={MoviesPage}></Route>
-      <Route path="/movies/:movieId" component={MovieDetailsPage}></Route>
+      <Route exact path={routes.home} component={HomePage}></Route>
+      <Route exact path={routes.movies} component={MoviesPage}></Route>
+      <Route path={routes.movieDetails} component={MovieDetailsPage}></Route>
       <Route component={NotFoundPage}></Route>
     </Switch>
   </>
