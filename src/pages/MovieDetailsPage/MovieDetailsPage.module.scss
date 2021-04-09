@@ -21,19 +21,30 @@
 .movieCard {
   display: flex;
   margin-bottom: 50px;
+  background-image: url('../../images/bgi.png');
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 600px;
 }
 
 .posterBox {
   width: 300px;
+  height: 450px;
   margin-right: 30px;
+}
+
+.poster {
+  height: 100%;
+  object-fit: fill;
+}
+
+.movieDesc {
+  flex-shrink: 1;
+  flex-grow: 0;
 }
 
 .title {
   margin-bottom: 30px;
-}
-
-.release {
-  margin-left: 12px;
 }
 
 .scoreTitle {
@@ -54,6 +65,7 @@
 
 .overviewText {
   margin-top: 12px;
+  width: 750px;
   font-size: 16px;
   font-weight: 400;
 }

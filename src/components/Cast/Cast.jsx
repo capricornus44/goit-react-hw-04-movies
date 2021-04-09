@@ -15,7 +15,6 @@ class Cast extends Component {
       .then(cast => this.setState({ actorsList: cast }));
   }
   render() {
-    // const imageBaseUrl = 'https://image.tmdb.org/t/p/w185';
     const { actorsList } = this.state;
     const isShowCast = actorsList.length > 0;
 

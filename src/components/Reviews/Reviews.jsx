@@ -4,8 +4,6 @@ import movieDbApi from '../../services/MovieDbApi';
 
 import scss from './Reviews.module.scss';
 
-// const getIdFromProps = props => props.match.params.id;
-
 class Reviews extends Component {
   state = {
     reviews: [],

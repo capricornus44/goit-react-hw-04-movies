@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ToastContainer } from 'react-toastify';
-
 import Searchbar from '../../components/Searchbar';
 import MoviesList from '../../components/MoviesList';
-import Loader from 'react-loader-spinner';
 import movieDbApi from '../../services/MovieDbApi';
 
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import scss from './MoviesPage.module.scss';
 
 class MoviesPage extends Component {
   state = {
     movies: [],
     query: '',
-    isLoading: false,
     error: null,
   };
 
@@ -42,16 +38,12 @@ class MoviesPage extends Component {
   };
 
   render() {
-    const { movies, isLoading } = this.state;
+    const { movies } = this.state;
     const isShowMovies = movies.length > 0;
 
     return (
       <section className={scss.movies}>
         <Searchbar onSubmit={this.handleSubmit} />
-
-        {isLoading && (
-          <Loader type="ThreeDots" color="#00BFFF" height={100} width={100} />
-        )}
 
         {isShowMovies && (
           <MoviesList location={this.props.location} movies={movies} />

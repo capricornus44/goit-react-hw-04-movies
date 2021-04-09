@@ -16,8 +16,6 @@ class HomePage extends Component {
   }
 
   render() {
-    // const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
-
     return (
       <>
         <ul className={scss.grid}>

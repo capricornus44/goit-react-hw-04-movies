@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import Cast from '../../components/Cast';
 import Reviews from '../../components/Reviews';
 import movieDbApi from '../../services/MovieDbApi';
@@ -41,16 +40,8 @@ class MovieDetailsPage extends Component {
   };
 
   render() {
-    const {
-      genres,
-      release_date,
-      overview,
-      poster_path,
-      title,
-      vote_average,
-    } = this.state;
+    const { genres, overview, poster_path, title, vote_average } = this.state;
 
-    // const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
     const voteAverage = vote_average * 10;
 
     return (
@@ -69,17 +60,14 @@ class MovieDetailsPage extends Component {
               <img
                 src={
                   poster_path &&
-                  `https://image.tmdb.org/t/p/w500/${poster_path}`
+                  `https://image.tmdb.org/t/p/w300/${poster_path}`
                 }
                 alt={`${title} poster`}
                 className={scss.poster}
               />
             </div>
             <div className={scss.movieDesc}>
-              <h1 className={scss.title}>
-                {title}
-                <span className={scss.release}>({release_date})</span>
-              </h1>
+              <h1 className={scss.title}>{title}</h1>
 
               <p className={scss.scoreTitle}>
                 User Score:
@@ -121,6 +109,7 @@ class MovieDetailsPage extends Component {
               </li>
             </ul>
           </div>
+
           {/* <Route path={`${this.props.match.url}/cast`} component={Cast} /> */}
           {/* <Route path={`${this.props.match.url}/reviews`} component={Reviews} /> */}
 
