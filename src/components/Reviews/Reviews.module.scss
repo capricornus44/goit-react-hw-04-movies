@@ -1,0 +1,29 @@
+.list {
+  margin-top: 20px;
+  //   border-top: 2px solid lightgrey;
+  //   padding-top: 20px;
+}
+
+.item {
+  padding-top: 20px;
+  border-top: 2px solid lightgrey;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 20px;
+  padding-top: 20px;
+  border-top: 2px solid lightgrey;
+}
+
+.author {
+  margin-bottom: 10px;
+}
+
+.review {
+  margin-bottom: 10px;
+}
+
+.link:hover,
+.link:focus {
+  color: tomato;
+}

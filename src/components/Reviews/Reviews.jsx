@@ -1,7 +1,56 @@
-const Reviews = () => {
-  return <h1>Reviews</h1>;
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import movieDbApi from '../../services/MovieDbApi';
+
+import scss from './Reviews.module.scss';
+
+// const getIdFromProps = props => props.match.params.id;
+
+class Reviews extends Component {
+  state = {
+    reviews: [],
+  };
+
+  componentDidMount() {
+    movieDbApi
+      .fetchReviews(this.props.id)
+      .then(results => this.setState({ reviews: results }));
+  }
+
+  render() {
+    const { reviews } = this.state;
+    const isShowReviews = reviews.length > 0;
+
+    return (
+      <>
+        {isShowReviews ? (
+          <ul className={scss.list}>
+            {reviews.map(review => (
+              <li key={review.id} className={scss.item}>
+                <h4 className={scss.author}>Author: {review.author}</h4>
+                <p className={scss.review}>{review.content}</p>
+                <a href={review.url} className={scss.link}>
+                  {review.url}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <h3>We don't have any reviews for this movie</h3>
+        )}
+      </>
+    );
+  }
+}
+
+Reviews.propTypes = {
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      movieId: PropTypes.number.isRequired,
+      author: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    }),
+  ),
 };
 
 export default Reviews;
-
-//https://api.themoviedb.org/3/movie/{movieId}/reviews?api_key=989c90c59500ad26e3fa4e26d53d2bd3&language=en-US&page=1
