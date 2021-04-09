@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import routes from '../../routes';
+
 import scss from './Header.module.scss';
 
 const Header = () => (
@@ -10,7 +12,7 @@ const Header = () => (
         <li className={scss.item}>
           <NavLink
             exact
-            to="/"
+            to={routes.home}
             className={scss.link}
             activeClassName={scss.linkActive}
           >
@@ -20,7 +22,7 @@ const Header = () => (
         <li className={scss.item}>
           <NavLink
             exact
-            to="/movies"
+            to={routes.movies}
             className={scss.link}
             activeClassName={scss.linkActive}
           >
