@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import { NavLink, Route } from 'react-router-dom';
-import Cast from '../../components/Cast';
-import Reviews from '../../components/Reviews';
+import React, { Component, lazy, Suspense } from 'react';
+import { NavLink, Route, Switch } from 'react-router-dom';
+// import Cast from '../../components/Cast';
+// import Reviews from '../../components/Reviews';
 import movieDbApi from '../../services/MovieDbApi';
 
 import routes from '../../routes';
-
 import scss from './MovieDetailsPage.module.scss';
+
+const Cast = lazy(() => import('../../components/Cast'));
+const Reviews = lazy(() => import('../../components/Reviews'));
 
 class MovieDetailsPage extends Component {
   state = {
@@ -24,13 +26,19 @@ class MovieDetailsPage extends Component {
 
     movieDbApi
       .fetchMovieDetails(movieId)
-      .then(data => this.setState({ ...data }));
+      .then(data => this.setState({ ...data }))
+      .catch(error => console.log(error));
   }
 
   handleGoBack = () => {
     const { location, history } = this.props;
 
-    history.push(location?.state?.from || routes.movies);
+    if (location.state && location.state.from) {
+      return history.push(location.state.from);
+    }
+    history.push('/');
+
+    // history.push(location?.state?.from || routes.movies);
 
     // if (Location.state && location.state.from) {
     //   return history.push(location.state.from);
@@ -113,18 +121,22 @@ class MovieDetailsPage extends Component {
           {/* <Route path={`${this.props.match.url}/cast`} component={Cast} /> */}
           {/* <Route path={`${this.props.match.url}/reviews`} component={Reviews} /> */}
 
-          <Route
-            path={`${this.props.match.url}/cast`}
-            render={props => (
-              <Cast {...props} id={this.props.match.params.movieId} />
-            )}
-          />
-          <Route
-            path={`${this.props.match.url}/reviews`}
-            render={props => (
-              <Reviews {...props} id={this.props.match.params.movieId} />
-            )}
-          />
+          <Suspense fallback={<h1 lassName="loading">Loadind...</h1>}>
+            <Switch>
+              <Route
+                path={`${this.props.match.url}/cast`}
+                render={props => (
+                  <Cast {...props} id={this.props.match.params.movieId} />
+                )}
+              />
+              <Route
+                path={`${this.props.match.url}/reviews`}
+                render={props => (
+                  <Reviews {...props} id={this.props.match.params.movieId} />
+                )}
+              />
+            </Switch>
+          </Suspense>
         </section>
       </>
     );

@@ -12,8 +12,10 @@ class Cast extends Component {
   componentDidMount() {
     movieDbApi
       .fetchCast(this.props.id)
-      .then(cast => this.setState({ actorsList: cast }));
+      .then(cast => this.setState({ actorsList: cast }))
+      .catch(error => console.log(error));
   }
+
   render() {
     const { actorsList } = this.state;
     const isShowCast = actorsList.length > 0;

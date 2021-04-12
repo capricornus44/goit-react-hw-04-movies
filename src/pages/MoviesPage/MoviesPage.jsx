@@ -27,9 +27,12 @@ class MoviesPage extends Component {
   handleSubmit = query => {
     const { history } = this.props;
     this.setState({ query });
-    movieDbApi.fetchMoviesUponRequest(query).then(results => {
-      this.setState({ movies: results });
-    });
+    movieDbApi
+      .fetchMoviesUponRequest(query)
+      .then(results => {
+        this.setState({ movies: results });
+      })
+      .catch(error => console.log(error));
 
     history.push({
       pathname: history.pathname,

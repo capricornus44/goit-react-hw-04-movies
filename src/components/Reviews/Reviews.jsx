@@ -12,7 +12,8 @@ class Reviews extends Component {
   componentDidMount() {
     movieDbApi
       .fetchReviews(this.props.id)
-      .then(results => this.setState({ reviews: results }));
+      .then(results => this.setState({ reviews: results }))
+      .catch(error => console.log(error));
   }
 
   render() {

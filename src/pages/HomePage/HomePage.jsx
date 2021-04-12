@@ -12,7 +12,8 @@ class HomePage extends Component {
   async componentDidMount() {
     movieDbApi
       .fetchTrendingMovies()
-      .then(results => this.setState({ trendMoviesList: results }));
+      .then(results => this.setState({ trendMoviesList: results }))
+      .catch(error => console.log(error));
   }
 
   render() {
