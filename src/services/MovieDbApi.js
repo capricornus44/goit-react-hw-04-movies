@@ -12,10 +12,6 @@ const fetchTrendingMovies = async () => {
   } catch (error) {
     throw new Error(error);
   }
-
-  // return axios
-  //   .get(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
-  //   .then(response => response.data.results);
 };
 
 const fetchMovieDetails = async movieId => {
@@ -27,10 +23,6 @@ const fetchMovieDetails = async movieId => {
   } catch (error) {
     throw new Error(error);
   }
-
-  // return axios
-  //   .get(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`)
-  //   .then(response => response.data);
 };
 
 const fetchCast = async movieId => {
@@ -42,10 +34,6 @@ const fetchCast = async movieId => {
   } catch (error) {
     throw new Error(error);
   }
-
-  // return axios
-  //   .get(`${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`)
-  //   .then(response => response.data.cast);
 };
 
 const fetchReviews = async movieId => {
@@ -57,12 +45,6 @@ const fetchReviews = async movieId => {
   } catch (error) {
     throw new Error(error);
   }
-
-  // return axios
-  //   .get(
-  //     `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`,
-  //   )
-  //   .then(response => response.data.results);
 };
 
 const fetchMoviesUponRequest = async query => {
@@ -74,12 +56,6 @@ const fetchMoviesUponRequest = async query => {
   } catch (error) {
     throw new Error(error);
   }
-
-  // return axios
-  //   .get(
-  //     `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=1&include_adult=false`,
-  //   )
-  //   .then(response => response.data.results);
 };
 
 const movieDbApi = {

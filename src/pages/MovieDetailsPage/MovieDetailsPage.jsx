@@ -1,10 +1,7 @@
 import React, { Component, lazy, Suspense } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
-// import Cast from '../../components/Cast';
-// import Reviews from '../../components/Reviews';
 import movieDbApi from '../../services/MovieDbApi';
 
-import routes from '../../routes';
 import scss from './MovieDetailsPage.module.scss';
 
 const Cast = lazy(() => import('../../components/Cast'));
@@ -33,18 +30,9 @@ class MovieDetailsPage extends Component {
   handleGoBack = () => {
     const { location, history } = this.props;
 
-    if (location.state && location.state.from) {
-      return history.push(location.state.from);
-    }
-    history.push('/');
+    history.push(location.state);
 
     // history.push(location?.state?.from || routes.movies);
-
-    // if (Location.state && location.state.from) {
-    //   return history.push(location.state.from);
-    // }
-
-    // history.push(routes.movies);
   };
 
   render() {
@@ -101,25 +89,28 @@ class MovieDetailsPage extends Component {
             <ul className={scss.addBoxList}>
               <li className={scss.addBoxItem}>
                 <NavLink
-                  to={`${this.props.match.url}/cast`}
                   className={scss.addBoxLink}
+                  to={{
+                    pathname: `${this.props.match.url}/cast`,
+                    state: this.props.location.state,
+                  }}
                 >
                   Cast
                 </NavLink>
               </li>
               <li className={scss.addBoxItem}>
                 <NavLink
-                  to={`${this.props.match.url}/reviews`}
                   className={scss.addBoxLink}
+                  to={{
+                    pathname: `${this.props.match.url}/reviews`,
+                    state: this.props.location.state,
+                  }}
                 >
                   Reviews
                 </NavLink>
               </li>
             </ul>
           </div>
-
-          {/* <Route path={`${this.props.match.url}/cast`} component={Cast} /> */}
-          {/* <Route path={`${this.props.match.url}/reviews`} component={Reviews} /> */}
 
           <Suspense fallback={<h1 lassName="loading">Loadind...</h1>}>
             <Switch>

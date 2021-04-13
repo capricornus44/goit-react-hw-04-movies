@@ -1,17 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import routes from '../../routes';
 
 import scss from './MoviesList.module.scss';
 
-const MoviesList = ({ movies }) => {
+const MoviesList = ({ movies, location }) => {
   return (
     <ul className={scss.list}>
       {movies.map(movie => (
         <li className={scss.item} key={movie.id}>
-          <NavLink className={scss.link} to={`${routes.movies}/${movie.id}`}>
+          <NavLink
+            className={scss.link}
+            to={{
+              pathname: `${routes.movies}/${movie.id}`,
+              state: location,
+            }}
+          >
             {movie.title}
           </NavLink>
         </li>
@@ -29,4 +35,4 @@ MoviesList.propTypes = {
   ).isRequired,
 };
 
-export default MoviesList;
+export default withRouter(MoviesList);

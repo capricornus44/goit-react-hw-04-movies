@@ -23,8 +23,11 @@ class HomePage extends Component {
           {this.state.trendMoviesList.map(({ id, poster_path, title }) => (
             <li key={id} className={scss.item}>
               <NavLink
-                to={`${this.props.match.url}movies/${id}`}
                 className={scss.navLink}
+                to={{
+                  pathname: `${this.props.match.url}movies/${id}`,
+                  state: this.props.location,
+                }}
               >
                 <img
                   src={

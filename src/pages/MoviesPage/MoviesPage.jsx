@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import Searchbar from '../../components/Searchbar';
 import MoviesList from '../../components/MoviesList';
 import movieDbApi from '../../services/MovieDbApi';
+import qs from 'query-string';
 
 import scss from './MoviesPage.module.scss';
 
@@ -16,12 +17,13 @@ class MoviesPage extends Component {
 
   componentDidMount() {
     const { location } = this.props;
-    const getMovies = new URLSearchParams(location.search).get('query');
 
-    if (!getMovies) {
-      return;
-    }
-    this.onSubmit(getMovies);
+    const { query } = qs.parse(location.search);
+
+    query &&
+      movieDbApi.fetchMoviesUponRequest(query).then(results => {
+        this.setState({ movies: results });
+      });
   }
 
   handleSubmit = query => {
