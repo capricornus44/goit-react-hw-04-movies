@@ -1,5 +1,6 @@
 import React, { Component, lazy, Suspense } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 import movieDbApi from '../../services/MovieDbApi';
 
 import scss from './MovieDetailsPage.module.scss';
@@ -31,8 +32,6 @@ class MovieDetailsPage extends Component {
     const { location, history } = this.props;
 
     history.push(location.state);
-
-    // history.push(location?.state?.from || routes.movies);
   };
 
   render() {
@@ -112,7 +111,18 @@ class MovieDetailsPage extends Component {
             </ul>
           </div>
 
-          <Suspense fallback={<h1 lassName="loading">Loadind...</h1>}>
+          <Suspense
+            fallback={
+              <Loader
+                className="spinner"
+                type="ThreeDots"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={3000}
+              />
+            }
+          >
             <Switch>
               <Route
                 path={`${this.props.match.url}/cast`}
